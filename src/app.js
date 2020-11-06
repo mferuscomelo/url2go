@@ -79,8 +79,6 @@ app.post('/create-url', (req, res) => {
   });
 });
 
-app.set('port', 8080);
-
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(process.env.PORT || 5000, () => {
   console.log(`Express running at PORT ${server.address().port}`);
 });
