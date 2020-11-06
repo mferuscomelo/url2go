@@ -7,42 +7,57 @@
 
     <title>Url2Go</title>
 
-    <link rel=" stylesheet" type="text/css" media="screen" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-wxqG4glGB3nlqX0bi23nmgwCSjWIW13BdLUEYC4VIMehfbcro/ATkyDsF/AbIOVe" crossorigin="anonymous">
+    <link rel=" stylesheet" type="text/css" media="screen" href="tooltip.css">
+    <link rel=" stylesheet" type="text/css" media="screen" href="main.css">
 </head>
 <body>
     <section class="hero"> 
         <div class="content">
             <div class="text">
-                <h1>Mehr als nur kürzere Links</h1>
-                <p></p>
+                <h1>Entdecke Url2Go:</h1>
+                <h4>Einen URL-Verkürzer für das Gymnasium Ochsenhausen</h4>
             </div>
             <img src="/images/hero-img.svg" alt="">
         </div>
-        <div class="hero-card fancy-card">
+    </section>
+
+    <section class="converter">
+        <div class="converter-card fancy-card">
             <form>
                 <div class="form-group">
                     <span id="protocol">https://</span>
-                    <input class="form-field" id="url-input" type="text" placeholder="Long Url">
+                    <input class="form-field" id="url-input" type="text" placeholder="Long Url" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                     <span>url2go.org/</span>
-                    <input class="form-field" id="key-input" type="text" placeholder="Cusom Link" maxlength="10">
+                    <input class="form-field" id="key-input" type="text" autocomplete="off" placeholder="Custom Link" maxlength="10">
                 </div>
 
-                <button type="submit">Shorten</button>
+                <button type="submit">Shorten!</button>
             </form>
-        </div>
-    </section>
 
-    <section class="benefits">
-        <div class="cards">
-            <div class="fancy-card">
+            <div class="dialog success-dialog">
+                <p class="message">
+                    Fertig! Sie koennen jetzt Ihren link mit 
+                    <button data-balloon="In die Zwischenablage kopieren" data-balloon-pos="down" id="short-url" onclick="navigator.clipboard.writeText(event.target.innerHTML)"></button>
+                    aufrufen.
+                </p>
+            </div>
 
+            <div class="dialog error-dialog">
+                <p class="message" id="error-message">
+                    Hilfe!
+                </p>
             </div>
         </div>
     </section>
+
+    <p class="credits">
+        Mit <i class="fas fa-heart"></i> entwickelt von Milan Ferus-Comelo
+    </p>
 
     <script src="main.js"></script>
 </body>

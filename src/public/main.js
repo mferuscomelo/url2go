@@ -1,11 +1,14 @@
 const form = document.querySelector('form');
 const urlInput = document.querySelector('#url-input');
 const keyInput = document.querySelector('#key-input');
+const urlButton = document.querySelector('#short-url');
+const successDialog = document.querySelector('.success-dialog');
+const errorDialog = document.querySelector('.error-dialog');
 
-var url;
+urlInput.value = '';
+keyInput.value = '';
 
 urlInput.addEventListener('input', (event) => {
-    url = urlInput.value;
     var protocol = event.target.value.match(/^https?:\/\//, '');
 
     if(protocol == null)
@@ -27,19 +30,32 @@ form.addEventListener('submit', (event) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            url: url,
+            url: 'https://' + urlInput.value,
             key: keyInput.value,
             expireTime: 60, // TODO: need to implement an auto-delete feature
         })
     })
-        .then(response => response.json())
-        .then(body => {
+        .then( (response) => {
+            // response.json();
+            // console.log(response);
 
-            while (result.hasChildNodes()) {
-                result.removeChild(result.lastChild);
+            // while (result.hasChildNodes()) {
+            //     result.removeChild(result.lastChild);
+            // }
+
+            if(response.status == 200) {
+                successDialog.classList.add('visible');
+                errorDialog.classList.remove('visible');
+
+                document.querySelector('#short-url').innerHTML = 'url2go.org/' + keyInput.value;
+            } else if(response.status == 400) {
+                successDialog.classList.remove('visible');
+                errorDialog.classList.add('visible');
+
+                document.querySelector('#error-message').innerHTML = 'Etwas ist schief gelaufen. Bitte versuche es erneut.'
             }
-
-            console.log(JSON.stringify(body))
         })
-        .catch(console.error)
+        .catch( (error) => {
+            console.error('Error: ', error);
+        });
 });

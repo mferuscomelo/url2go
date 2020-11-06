@@ -14,8 +14,8 @@ const { execSync } = require('child_process');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(lessMiddleware(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(parse.json());
 
 MongoClient.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -32,7 +32,6 @@ app.get('/', (req, res) => {
 
 app.get('/:key', (req, res) => {
   const key = req.params.key;
-  console.log(key);
   const { db } = req.app.locals;
   doesUrlExist(db, key)
     .then(doc => {
@@ -42,7 +41,7 @@ app.get('/:key', (req, res) => {
     .catch(console.error);
 });
 
-app.post('/create-url', (req, res) => {
+app.post('/create-url', async (req, res) => {
   // for debugging
   console.log('Url submitted: ', req.body.url);
   console.log('Key submitted: ', req.body.key);
@@ -61,6 +60,13 @@ app.post('/create-url', (req, res) => {
 
   const { db } = req.app.locals;
 
+  await doesUrlExist(db, key)
+    .then( () => {
+      if(doc != null)
+        return res.status(400).send({error: 'entry already exists'});
+    })
+    .catch(console.error);
+
   const dbUrls = db.collection('urls');
   var currentDate = new Date();
 
@@ -75,7 +81,7 @@ app.post('/create-url', (req, res) => {
     return res.status(200).send();
   })
   .catch( (err) => {
-    return res.status(400).send({error: 'can\' create an entry in the database'});
+    return res.status(400).send({error: 'can\'t create an entry in the database'});
   });
 });
 
