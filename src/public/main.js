@@ -21,6 +21,12 @@ urlInput.addEventListener('input', (event) => {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    if(urlInput.value == '' || urlInput.value == null) {
+        error();
+        return;
+    }
+
     // const expireSelected = document.querySelector('.expire');
 
     fetch('/create-url', {
@@ -44,18 +50,26 @@ form.addEventListener('submit', (event) => {
             // }
 
             if(response.status == 200) {
-                successDialog.classList.add('visible');
-                errorDialog.classList.remove('visible');
+                success();
 
                 document.querySelector('#short-url').innerHTML = 'url2go.org/' + keyInput.value;
             } else if(response.status == 400) {
-                successDialog.classList.remove('visible');
-                errorDialog.classList.add('visible');
+                error();
 
                 document.querySelector('#error-message').innerHTML = 'Etwas ist schief gelaufen. Bitte versuche es erneut.'
             }
         })
         .catch( (error) => {
-            console.error('Error: ', error);
+            error();
         });
 });
+
+function error() {
+    successDialog.classList.remove('visible');
+    errorDialog.classList.add('visible');
+}
+
+function success() {
+    successDialog.classList.add('visible');
+    errorDialog.classList.remove('visible');
+}

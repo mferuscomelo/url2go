@@ -76,6 +76,11 @@ small, .text_small {
     font-size: 0.8rem;
 }
 
+a {
+    text-decoration: none !important;
+    color: var(--purple-color);
+}
+
 button {
     background-color: var(--aqua-color);
     color: white;
@@ -181,6 +186,7 @@ section {
 .hero {
     background-color: white;
     margin-bottom: 30px;
+    height: 60%;
 
     h1 {
         font-weight: 700;
@@ -198,8 +204,8 @@ section {
         }
 
         img {
-            width: 40%;
-            max-height: 90%;
+            height: 100%;
+            place-self: flex-start flex-end;
         }
     }
 }
