@@ -1,2 +1,2 @@
-# url2go
-A URL Shortener for GO
+# Url2Go
+A URL Shortener for Gymnasium Ochsenhausen
