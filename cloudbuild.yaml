@@ -1,3 +1,4 @@
+# For the auto-deploy script
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
