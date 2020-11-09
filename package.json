@@ -17,14 +17,12 @@
   },
   "homepage": "https://github.com/mferuscomelo/url2go#readme",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase-admin": "^9.3.0",
-    "less-middleware": "^3.1.0",
-    "mongodb": "^3.6.2"
+    "less-middleware": "^3.1.0"
   },
   "engines": {
-    "node": "14.x",
+    "node": "14.x.x",
     "npm": "6.x"
   }
 }
