@@ -10,7 +10,6 @@ const lessMiddleware = require('less-middleware');
 const path = require('path');
 const parse = require('body-parser');
 const urlModule = require('url');
-const os = require('os');
 const compression = require('compression');
 const async = require('async');
 const dotenv = require('dotenv');
@@ -37,22 +36,11 @@ function parallelLoad(middlewares) {
 }
 
 // Convert .less styles to .css
-if (os.hostname().indexOf("local") > -1)
+if (process.env.NODE_ENV === 'dev')
   app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 // Make Express use the /public directory
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(parse.json());
 app.use(parallelLoad([
-  function (req, res, next) {
-    if (req.secure || process.env.NODE_ENV === 'dev') {
-      // request was via https, so do no special handling
-      return;
-    } else {
-      // request was via http, so redirect to https
-      res.redirect('https://' + req.headers.host + req.url);
-    }
-  },
   compression(),
   express.static(path.join(__dirname, 'public')),
   parse.json()
