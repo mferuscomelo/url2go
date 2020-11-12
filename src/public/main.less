@@ -4,11 +4,12 @@
     --purple-color: #4E3266;
     --aqua-color: #39cabc;
     --aqua-dark-color: #2eada1;
+    --light-grey-color: #99a3ba;
     --grey-color: #8c8c8c;
     --green-color: #66cc66;
     --red-color: #ff6666;
 
-    --input-color: #99a3ba;
+    --input-color: var(--light-grey-color);
     --input-border: #cdd9ed;
     --input-background: #fff;
     --input-placeholder: var(--grey-color);
@@ -96,6 +97,82 @@ button {
         background-color: var(--aqua-dark-color);
     }
 }
+
+.button {
+    border-radius: 6px;
+    // position: absolute;
+    position: relative;
+    // left: 50%;
+    // top: 50%;
+    display: block;
+    background: #fff;
+    width: 150px;
+    // box-shadow: 0 2px 6px rgba(170, 185, 200, 0.4);
+    // -webkit-transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
+
+    svg {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        fill: #fff;
+
+        &.load {
+            margin: -15px 0 0 -15px;
+        }
+
+        &.check,
+        &.cross {
+            margin: -10px 0 0 -10px;
+        }
+    }
+
+    div {
+        height: 4px;
+        margin: -2px 0 0 0;
+        position: absolute;
+        top: 50%;
+        left: 71px;
+        right: 25px;
+        background: var(--light-grey-color);
+        display: none;
+        border-radius: 2px;
+
+        span {
+            position: absolute;
+            background: var(--green-color);
+            height: 4px;
+            left: 0;
+            top: 0;
+            width: 0;
+            display: block;
+            border-radius: 2px;
+        }
+    }
+
+    a {
+        position: relative;
+        display: block;
+        background: var(--aqua-color);
+        z-index: 2;
+        // line-height: 56px;
+        // height: 56px;
+        line-height: 42.33px;
+        height: 42.33px;
+        border-radius: 6px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        // box-shadow: 0 2px 6px rgba(170, 185, 200, 0.4);
+
+        span {
+            cursor: pointer;
+            display: block;
+        }
+    }
+}
+  
 
 .fancy-card {
     box-shadow: 0 2px 20px rgba(0,0,0,0.164);
@@ -253,6 +330,7 @@ section {
         height: 0;
         overflow: hidden;
         margin-top: 0;
+        position: relative;
 
         &.visible {
             height: 42px;
@@ -277,6 +355,12 @@ section {
             width: unset;
         }
 
+        i {
+            position: absolute;
+            right: 15px;
+            color: #990000;
+            cursor: pointer;
+        }
     }
 }
 

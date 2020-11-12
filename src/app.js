@@ -9,7 +9,7 @@ const lessMiddleware = require('less-middleware');
 
 const path = require('path');
 const parse = require('body-parser');
-const urlModule = require('url');
+const validUrl = require('valid-url');
 const compression = require('compression');
 const async = require('async');
 const dotenv = require('dotenv');
@@ -40,9 +40,15 @@ function parallelLoad(middlewares) {
 if (process.env.NODE_ENV === 'dev')
   app.use(lessMiddleware(path.join(__dirname, 'public')));
 
-// Make Express use the /public directory
 app.use(parallelLoad([
-  helmet(),
+  // helmet({
+  //   contentSecurityPolicy: {
+  //     directives: {
+  //       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+  //       "scriptSrc": ["'self'", "https://ajax.googleapis.com"],
+  //     }
+  //   }
+  // }),
   compression(),
   express.static(path.join(__dirname, 'public')),
   parse.json()
@@ -82,18 +88,15 @@ app.post('/create-url', async (req, res) => {
   let url;
 
   // Check if the url is a proper url
-  try {
-      url = urlModule.parse(req.body.url);
-  } catch (err) {
-      return res.status(400).send({error: 'invalid URL'});
-  }
+  if(!validUrl.isUri(req.body.url))
+    return res.status(400).send({errorMessage: 'Ungültige URL. Bitte prüfen Sie auf Fehler.'});
 
   // Check if the URL exists
   await getUrl(key)
     .then( (doc) => {
       if(doc != null)
         // The Url2Go already exists
-        return res.status(400).send({error: 'entry already exists'});
+        return res.status(400).json({errorMessage: 'Verkürzte URL bereits vorhanden. Bitte versuchen Sie eine andere Verkürtzung.'});
     })
     .catch( (error) => {
       console.error(error);
@@ -111,7 +114,7 @@ app.post('/create-url', async (req, res) => {
     return res.status(200).send();
   })
   .catch( (err) => {
-    return res.status(400).send({error: 'can\'t create an entry in the database'});
+    return res.status(400).send({errorMessage: 'Fehler beim Herstellen einer Datenbankverbindung. Bitte versuchen Sie erneuert.'});
   });
 });
 
