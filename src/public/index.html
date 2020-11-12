@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Einen URL-Verkürzer für das Gymnasium Ochsenhausen">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
 
     <title>Url2Go</title>
 
@@ -35,12 +39,12 @@
             <form>
                 <div class="form-group">
                     <span id="protocol">https://</span>
-                    <input class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
+                    <input aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                     <span>url2go.org/</span>
-                    <input class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
+                    <input aria-label="benutzerdefinierten Link" class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
                 </div>
 
                 <button type="submit">Kürzen!</button>
@@ -49,7 +53,7 @@
             <div class="dialog success-dialog">
                 <p class="message">
                     Fertig! Sie koennen jetzt Ihren link mit 
-                    <button data-balloon="In die Zwischenablage kopieren" data-balloon-pos="down" id="short-url" onclick="navigator.clipboard.writeText(event.target.innerHTML)"></button>
+                    <button aria-label="Link in die Zwischenablage kopieren" data-balloon="In die Zwischenablage kopieren" data-balloon-pos="down" id="short-url" onclick="navigator.clipboard.writeText(event.target.innerHTML)"></button>
                     aufrufen.
                 </p>
             </div>
