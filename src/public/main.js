@@ -29,6 +29,7 @@ keyInput.value = '';
 var isError = true;
 var hasCompleted = false;
 var dbResponse;
+var protocol;
 
 // Listen for the click event on the submit button
 $(document).ready(function() {
@@ -103,6 +104,24 @@ $(document).ready(function() {
 	});
 });
 
+// Listen for the input event on the urlInput element so that we can remove the protocol from the URL
+urlInput.addEventListener('input', (event) => {
+    protocol = event.target.value.match(/^https?:\/\//);
+
+    if(protocol == null)
+        protocol = 'https://';
+
+    document.querySelector('#protocol').textContent = protocol;
+
+    urlInput.value = event.target.value.replace(/^https?:\/\//, '');
+});
+
+closeButtons.forEach( (button) => {
+    button.addEventListener('click', (event) => {
+        hideDialogs();
+    })
+});
+
 function createUrl2Go() {
     isError = true;
     hasCompleted = false;
@@ -119,7 +138,7 @@ function createUrl2Go() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            url: urlInput.value,
+            url: protocol + urlInput.value,
             key: keyInput.value,
             expireTime: 60, // TODO: need to implement an auto-delete feature
         })
@@ -153,24 +172,6 @@ async function showResult() {
         document.querySelector('#error-message').innerHTML = (await dbResponse.json()).errorMessage;
     }
 }
-
-// Listen for the input event on the urlInput element so that we can remove the protocol from the URL
-urlInput.addEventListener('input', (event) => {
-    var protocol = event.target.value.match(/^https?:\/\//);
-
-    if(protocol == null)
-        protocol = 'https://';
-
-    document.querySelector('#protocol').textContent = protocol;
-
-    urlInput.value = event.target.value.replace(/^https?:\/\//, '');
-});
-
-closeButtons.forEach( (button) => {
-    button.addEventListener('click', (event) => {
-        hideDialogs();
-    })
-})
 
 function error() {
     isError = true;
