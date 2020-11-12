@@ -107,6 +107,8 @@ function createUrl2Go() {
     isError = true;
     hasCompleted = false;
 
+    gtag('event', 'create_url');      
+
     hideDialogs();
 
     // Create new Url2Go
