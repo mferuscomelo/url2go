@@ -10,6 +10,7 @@ const lessMiddleware = require('less-middleware');
 const path = require('path');
 const parse = require('body-parser');
 const urlModule = require('url');
+var os = require('os');
 
 // Initialize firebase and connect to the correct database
 admin.initializeApp({
@@ -22,7 +23,8 @@ const db = admin.firestore();
 const app = express();
 
 // Convert .less styles to .css
-app.use(lessMiddleware(path.join(__dirname, 'public')));
+if (os.hostname().indexOf("local") > -1)
+  app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 // Make Express use the /public directory
 app.use(express.static(path.join(__dirname, 'public')));
