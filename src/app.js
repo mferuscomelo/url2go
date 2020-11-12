@@ -13,6 +13,7 @@ const urlModule = require('url');
 const compression = require('compression');
 const async = require('async');
 const dotenv = require('dotenv');
+const helmet = require('helmet');
 
 // Initialize the environment variables
 dotenv.config();
@@ -41,6 +42,7 @@ if (process.env.NODE_ENV === 'dev')
 
 // Make Express use the /public directory
 app.use(parallelLoad([
+  helmet(),
   compression(),
   express.static(path.join(__dirname, 'public')),
   parse.json()

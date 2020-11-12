@@ -22,7 +22,7 @@ keyInput.value = '';
 
 // Listen for the input event on the urlInput element so that we can remove the protocol from the URL
 urlInput.addEventListener('input', (event) => {
-    var protocol = event.target.value.match(/^https?:\/\//, '');
+    var protocol = event.target.value.match(/^https?:\/\//);
 
     if(protocol == null)
         protocol = 'https://';
@@ -36,7 +36,8 @@ urlInput.addEventListener('input', (event) => {
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    if(urlInput.value == '' || urlInput.value == null) {
+    if(urlInput.value == '' || urlInput.value == null || 
+        keyInput.value == '' || keyInput.value == null) {
         // Error, show error dialog
         error();
         return;

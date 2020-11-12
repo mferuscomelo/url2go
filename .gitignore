@@ -54,7 +54,6 @@
 # .env
 
 node_modules/
-
 debug.log
-
 .env
+.snyk
