@@ -85,10 +85,10 @@ app.post('/create-url', async (req, res) => {
   // Catch passed information
   let expireTime = req.body.expireTime;
   let key = req.body.key;
-  let url;
+  let url = req.body.url;
 
   // Check if the url is a proper url
-  if(!validUrl.isUri(req.body.url))
+  if(!validUrl.isUri(url))
     return res.status(400).send({errorMessage: 'Ungültige URL. Bitte prüfen Sie auf Fehler.'});
 
   // Check if the URL exists
@@ -107,7 +107,7 @@ app.post('/create-url', async (req, res) => {
   // Since the Url2Go doesn't exist, create a new one
   db.collection('urls').doc(key).set({
     key: key,
-    url: url.href,
+    url: url,
     // expireAt: new admin.firestore.Timestamp.fromDate(new Date(Date.now() + ((expireTime) / (60 * 24) )))
   })
   .then( () => {

@@ -124,9 +124,7 @@ closeButtons.forEach( (button) => {
 
 function createUrl2Go() {
     isError = true;
-    hasCompleted = false;
-
-    gtag('event', 'create_url');      
+    hasCompleted = false;      
 
     hideDialogs();
 
@@ -147,6 +145,7 @@ function createUrl2Go() {
             dbResponse = response;
 
             if(dbResponse.status == 200) {
+                gtag('event', 'create_url');
                 isError = false;
             } else if(dbResponse.status == 400) {
                 isError = true;
