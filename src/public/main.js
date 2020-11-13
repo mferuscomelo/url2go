@@ -1,10 +1,8 @@
+// Google Analytics
 window.dataLayer = window.dataLayer || [];
 function gtag(){ dataLayer.push(arguments); }
 gtag('js', new Date());
 gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
-
-// Get the form component so that we can listen for the submit event
-const form = document.querySelector('form');
 
 // Get the submit button so that we can listen for the click event
 const submitButton = document.querySelector('#submitButton');
@@ -15,17 +13,11 @@ const urlInput = document.querySelector('#url-input');
 // Get the input for the key so that we can query the value
 const keyInput = document.querySelector('#key-input');
 
-// Get the button to display the short URL so that the user can copy it to clipboard
-const urlButton = document.querySelector('#short-url');
-
 // Get the success dialog element so that we can show it
 const successDialog = document.querySelector('.success-dialog');
 
 // Get the error dialog element so that we can show it
 const errorDialog = document.querySelector('.error-dialog');
-
-// Get the close buttons for the dialogs
-const closeButtons = document.querySelectorAll('.close-icon');
 
 // Reset the input fields on page load
 urlInput.value = '';
@@ -34,36 +26,32 @@ keyInput.value = '';
 var protocol;
 
 // Listen for the click event on the submit button
-$(document).ready(function() {	
-	$(".button a span").click(function() {
-        if(urlInput.value == '' || urlInput.value == null || 
-            keyInput.value == '' || keyInput.value == null) {
-            // Error, show error dialog
-            error();
-            return;
-        }
+submitButton.addEventListener('click', () => {
+    if(urlInput.value == '' || urlInput.value == null || 
+        keyInput.value == '' || keyInput.value == null) {
+        // Error, show error dialog
+        error();
+        return;
+    }
 
-		var btn = $('#submitButton');
-		var loadSVG = btn.children("a").children(".load");
-        var loadBar = btn.children("div").children("span");
-
-        queueAnimations(function() {
-            return btn.children("a").children("span").fadeOut(200);
-        }, function() {
-            return btn.children("a").animate({width: 42.33}, 100);
-        }, function () {
-            loadSVG.fadeIn(300);
-            return btn.animate({width: 320}, 200);
-        }, function () {
-            createUrl2Go();
-            return btn.children('div').fadeIn(200);
-        }, function () {
-            return loadBar.animate({width: '75%'}, 1500);
-        });                 
-	});
+    // Start to animate button (wait at 75% until response from db)
+    queueAnimations(function() {
+        return submitButton.children("a").children("span").fadeOut(200);
+    }, function() {
+        return submitButton.children("a").animate({width: 42.33}, 100);
+    }, function () {
+        submitButton.children("a").children(".load").fadeIn(300);
+        return submitButton.animate({width: 320}, 200);
+    }, function () {
+        createUrl2Go();
+        return submitButton.children('div').fadeIn(200);
+    }, function () {
+        return submitButton.children("div").children("span").animate({width: '75%'}, 1500);
+    });
 });
 
-urlButton.addEventListener('click', () => {
+// For copy to clipboard
+document.querySelector('#short-url').addEventListener('click', () => {
     navigator.clipboard.writeText(target.innerHTML);
 })
 
@@ -79,18 +67,21 @@ urlInput.addEventListener('input', (event) => {
     urlInput.value = event.target.value.replace(/^https?:\/\//, '');
 });
 
+// Clear inputs on focus
 document.querySelectorAll('input').forEach( (input) => {
     input.addEventListener('focus', (event) => {
         event.target.value = '';
     })
 });
 
-closeButtons.forEach( (button) => {
+// Enable close buttons for the dialogs
+document.querySelectorAll('.close-icon').forEach( (button) => {
     button.addEventListener('click', (event) => {
         hideDialogs();
     })
 });
 
+// Function to play multiple animations
 function queueAnimations(start) {
     var rest = [].splice.call(arguments, 1),
         promise = $.Deferred();
@@ -105,6 +96,7 @@ function queueAnimations(start) {
     return promise;
 }
 
+// Function to create Url2Go
 function createUrl2Go() {  
     hideDialogs();
 
@@ -122,13 +114,14 @@ function createUrl2Go() {
         })
     })
         .then( async (response) => {
+            // Log create_url event in Google Analytics
             if(response.status == 200) {
                 gtag('event', 'create_url');
             }
 
-            var btn = $('#submitButton');
-            var loadSVG = btn.children("a").children(".load");
-            var loadBar = btn.children("div").children("span");
+            // Continue animating the button from 75% to 100%
+            var loadSVG = submitButton.children("a").children(".load");
+            var loadBar = submitButton.children("div").children("span");
             var icon;
 
             queueAnimations(function () {
@@ -137,28 +130,28 @@ function createUrl2Go() {
                 return loadSVG.fadeOut(200);
             }, function () {
                 if(response.status === 400) {
-                    icon = btn.children("a").children(".cross");
+                    icon = submitButton.children("a").children(".cross");
                 } else {
-                    icon = btn.children("a").children(".check");
+                    icon = submitButton.children("a").children(".check");
                 }
     
                 return icon.fadeIn(200);
             }, function () {
                 showResult(response);
     
-                return btn.children("div").fadeOut(200);
+                return submitButton.children("div").fadeOut(200);
             }, function() {
                 loadBar.width(0);
                         
                 return icon.fadeOut(200);
             }, function() {
-                btn.children("a").animate({
+                submitButton.children("a").animate({
                     width: 150	
                 });
     
-                return btn.animate({width: 150}, 300);
+                return submitButton.animate({width: 150}, 300);
             }, function() {
-                return btn.children("a").children("span").fadeIn(200);
+                return submitButton.children("a").children("span").fadeIn(200);
             });
         })
         .catch( (error) => {
@@ -167,6 +160,7 @@ function createUrl2Go() {
         });
 }
 
+// Function to show the success/error dialogs
 async function showResult(response) {
     if(response.status === 200) {
         // Success, show success dialog
@@ -181,16 +175,19 @@ async function showResult(response) {
     }
 }
 
+// Function to show error dialog
 function error() {
     successDialog.classList.remove('visible');
     errorDialog.classList.add('visible');
 }
 
+// Function to show success dialog
 function success() {
     successDialog.classList.add('visible');
     errorDialog.classList.remove('visible');
 }
 
+// Function to hide both dialogs
 function hideDialogs() {
     successDialog.classList.remove('visible');
     errorDialog.classList.remove('visible');
