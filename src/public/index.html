@@ -24,14 +24,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L0QSJV7D9P"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-L0QSJV7D9P');
-    </script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-L0QSJV7D9P"></script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -57,12 +50,12 @@
                 <!-- TODO: Add clear button -->
                 <div class="form-group">
                     <span id="protocol">https://</span>
-                    <input onfocus="this.value=''" aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
+                    <input aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                     <span>gymox.page/</span>
-                    <input onfocus="this.value=''" aria-label="benutzerdefinierten Link" class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
+                    <input aria-label="benutzerdefinierten Link" class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
                 </div>
 
                 <div class="button" id="submitButton">
@@ -99,8 +92,8 @@
 
             <div class="dialog success-dialog">
                 <p class="message">
-                    Fertig! Sie koennen jetzt Ihren link mit 
-                    <button aria-label="Link in die Zwischenablage kopieren" data-balloon="In die Zwischenablage kopieren" data-balloon-pos="down" id="short-url" onclick="navigator.clipboard.writeText(event.target.innerHTML)"></button>
+                    Fertig! Du kannst jetzt deinen Link mit 
+                    <button aria-label="Link in die Zwischenablage kopieren" data-balloon="In die Zwischenablage kopieren" data-balloon-pos="down" id="short-url"></button>
                     aufrufen.
                 </p>
                 <i class="far fa-times-circle close-icon green"></i>
@@ -108,7 +101,7 @@
 
             <div class="dialog error-dialog">
                 <p class="message" id="error-message">
-                    Bitte geben Sie die lange URL und eine Verkürztung ein.
+                    Gebe bitte die lange URL und eine Verkürztung ein.
                 </p>
                 <i class="far fa-times-circle close-icon red"></i>
             </div>
@@ -121,14 +114,24 @@
             <div class="close"></div>
         </div>
 
-        <p class="accordion">Wie kann ich meinen Link kürzen?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <p class="accordion">Wofür ist das?</p>
+        <div class="panel">Um Zeit zu sparen und Fehler zu vermeiden! Anstatt euren Freunden ganz lange Links zu schicken, könnt ihr Url2Go benutzen, um daraus einen kurzen, griffigen Namen zu machen. Die Emfänger müssen also nur einen kurzen Link eintippen. Fehler werden dadurch vermieden und Zeit gespart!</div>
+
+        <p class="accordion">Wie funktioniert das?</p>
+        <div class="panel">
+            <ol>
+                <li>Das lange URL eingeben</li>
+                <li>Verkürzte neue URL eingeben</li>
+                <li>Auf "Kürzen" klicken</li>
+                <li>Den verkürzten Link kopieren</li>
+                <li>Fertig! Jetzt kannst du es benutzen :)</li>
+            </ol>
+        </div>
     
-        <p class="accordion">Wie kann ich mitmachen?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    
-        <p class="accordion">Lorem ipsum dolor sit amet</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <p class="accordion">Wie kann ich mithelfen?</p>
+        <div class="panel">Dieses Projekt ist Open Source und ist auf <a href="https://github.com/mferuscomelo/url2go">GitHub</a> veröffentlicht. Falls du mithelfen möchtest oder Fragen hast, schicke bitte eine Email an <a href="mailto:milan.ferus-comelo@gymox.de">milan.ferus-comelo@gymox.de</a>.</div>
+
+        <p>Falls du mithelfen möchtest oder weitere Fragen hast, schicke bitte eine Email an <a href="mailto:milan.ferus-comelo@gymox.de">milan.ferus-comelo@gymox.de</a>.</p>
     </section>
 
 

@@ -41,14 +41,13 @@ if (process.env.NODE_ENV === 'dev')
   app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 app.use(parallelLoad([
-  // helmet({
-  //   contentSecurityPolicy: {
-  //     directives: {
-  //       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-  //       "scriptSrc": ["'self'", "https://ajax.googleapis.com"],
-  //     }
-  //   }
-  // }),
+  helmet(),
+  helmet.contentSecurityPolicy({
+    directives: {
+      "default-src": ["'self'", "https://fonts.googleapis.com/", "https://fonts.gstatic.com/", "https://use.fontawesome.com/", "http://www.w3.org/", "data:", "https://www.google-analytics.com/", "http://www.googletagmanager.com/"],
+      "script-src": ["'self'", "https://ajax.googleapis.com", "http://www.googletagmanager.com/"],
+    }
+  }),
   compression(),
   express.static(path.join(__dirname, 'public')),
   parse.json()
@@ -87,16 +86,19 @@ app.post('/create-url', async (req, res) => {
   let key = req.body.key;
   let url = req.body.url;
 
+  console.log('Key: ', key);
+  console.log('Url: ', url);
+
   // Check if the url is a proper url
   if(!validUrl.isUri(url))
-    return res.status(400).send({errorMessage: 'Ungültige URL. Bitte prüfen Sie auf Fehler.'});
+    return res.status(400).send({errorMessage: 'Ungültige URL. Bitte auf Fehler prüfen.'});
 
   // Check if the URL exists
   await getUrl(key)
     .then( (doc) => {
       if(doc != null)
         // The Url2Go already exists
-        return res.status(400).json({errorMessage: 'Verkürzte URL bereits vorhanden. Bitte versuchen Sie eine andere Verkürtzung.'});
+        return res.status(400).json({errorMessage: 'Verkürzte URL bereits vorhanden. Bitte eine andere Verkürtzung versuchen.'});
     })
     .catch( (error) => {
       console.error(error);
@@ -114,7 +116,7 @@ app.post('/create-url', async (req, res) => {
     return res.status(200).send();
   })
   .catch( (err) => {
-    return res.status(400).send({errorMessage: 'Fehler beim Herstellen einer Datenbankverbindung. Bitte versuchen Sie erneuert.'});
+    return res.status(400).send({errorMessage: 'Fehler beim Herstellen einer Datenbankverbindung. Bitte versucht es erneuert.'});
   });
 });
 

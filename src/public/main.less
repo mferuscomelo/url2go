@@ -3,7 +3,7 @@
 
     --purple-color: #4E3266;
     --aqua-color: #39cabc;
-    --aqua-dark-color: #2eada1;
+    --dark-aqua-color: #2eada1;
     --light-grey-color: #99a3ba;
     --grey-color: #8c8c8c;
     --green-color: #66cc66;
@@ -14,7 +14,7 @@
     --input-background: #fff;
     --input-placeholder: var(--grey-color);
 
-    --input-border-focus: var(--aqua-dark-color);
+    --input-border-focus: var(--dark-aqua-color);
 
     --group-color: var(--input-color);
     --group-border: var(--input-border);
@@ -79,7 +79,7 @@ small, .text_small {
 
 a {
     text-decoration: none !important;
-    color: var(--purple-color);
+    color: var(--dark-aqua-color);
 }
 
 button {
@@ -94,7 +94,7 @@ button {
     font-family: inherit;
 
     &:hover {
-        background-color: var(--aqua-dark-color);
+        background-color: var(--dark-aqua-color);
     }
 }
 
@@ -242,7 +242,7 @@ section {
 
     &.faq {
         width: 90%;
-        max-width: 1200px;
+        max-width: 1100px;
         margin: auto;
         position: absolute;
         background: white;
@@ -250,7 +250,7 @@ section {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 99;
-        padding: 0 16px;
+        padding: 0 20px;
         border-radius: 6px;
         display: none;
 
@@ -471,7 +471,8 @@ p.accordion {
     border: none;
     outline: none;
     transition: 0.4s;
-    margin-bottom:10px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
 
     &.active,
     &:hover {
@@ -491,27 +492,6 @@ p.accordion {
     }
 }
 
-// /* Add a background color to the accordion if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-// p.accordion.active, p.accordion:hover {
-//     background-color: #ddd;
-// }
-
-// /* Unicode character for "plus" sign (+) */
-// p.accordion:after {
-//     content: '\2795'; 
-//     font-size: 13px;
-//     color: #777;
-//     float: right;
-//     margin-left: 5px;
-// }
-
-// /* Unicode character for "minus" sign (-) */
-// p.accordion.active:after {
-//     content: "\2796"; 
-// }
-
-/* Style the element that is used for the panel class */
-
 div.panel {
     padding: 0 18px;
     background-color: white;
@@ -519,18 +499,13 @@ div.panel {
     overflow: hidden;
     transition: 0.4s ease-in-out;
     opacity: 0;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 
     &.show {
         opacity: 1;
-        max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */    
+        max-height: 500px; 
     }
 }
-
-// div.panel.show {
-//     opacity: 1;
-//     max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
-// }
 
 form {
     width: 100%;

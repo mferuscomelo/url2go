@@ -1,3 +1,8 @@
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
+
 // Get the form component so that we can listen for the submit event
 const form = document.querySelector('form');
 
@@ -26,14 +31,10 @@ const closeButtons = document.querySelectorAll('.close-icon');
 urlInput.value = '';
 keyInput.value = '';
 
-var isError = true;
-var hasCompleted = false;
-var dbResponse;
 var protocol;
 
 // Listen for the click event on the submit button
-$(document).ready(function() {
-	
+$(document).ready(function() {	
 	$(".button a span").click(function() {
         if(urlInput.value == '' || urlInput.value == null || 
             keyInput.value == '' || keyInput.value == null) {
@@ -42,67 +43,29 @@ $(document).ready(function() {
             return;
         }
 
-		var btn = $(this).parent().parent();
+		var btn = $('#submitButton');
 		var loadSVG = btn.children("a").children(".load");
         var loadBar = btn.children("div").children("span");
-		
-		btn.children("a").children("span").fadeOut(200, () => {
-			btn.children("a").animate({
-				width: 56	
-			}, 100, () => {
-				loadSVG.fadeIn(300);
-				btn.animate({
-					width: 320	
-				}, 200, () => {
-					btn.children('div').fadeIn(200, () => {
-						loadBar.animate({
-							width: '75%'
-						}, {
-                            duration: 5000,
-                            start: createUrl2Go(),
-                            step: (now, fx) => {
-                                if(hasCompleted) {
-                                    fx.end = '100';
-                                }
-                            },
-                            complete: () => {
-                                loadSVG.fadeOut(200, () => {
-                                    var icon;
 
-                                    if(isError) {
-                                        icon = btn.children("a").children(".cross");
-                                    } else {
-                                        icon = btn.children("a").children(".check");
-                                    }
-
-                                    icon.fadeIn(200, () => {
-                                        showResult();
-                                        setTimeout( () => {
-                                            btn.children("div").fadeOut(200, () => {
-                                                loadBar.width(0);
-                                                icon.fadeOut(200, () => {
-                                                    btn.children("a").animate({
-                                                        width: 150	
-                                                    });
-                                                    btn.animate({
-                                                        width: 150
-                                                    }, 300, () => {
-                                                        btn.children("a").children("span").fadeIn(200);
-                                                    });
-                                                });
-                                            });
-                                        }, 2000);	
-                                    });
-                                });
-                            }
-                        });
-					});
-				});
-			});
-        });
-                    
+        queueAnimations(function() {
+            return btn.children("a").children("span").fadeOut(200);
+        }, function() {
+            return btn.children("a").animate({width: 42.33}, 100);
+        }, function () {
+            loadSVG.fadeIn(300);
+            return btn.animate({width: 320}, 200);
+        }, function () {
+            createUrl2Go();
+            return btn.children('div').fadeIn(200);
+        }, function () {
+            return loadBar.animate({width: '75%'}, 1500);
+        });                 
 	});
 });
+
+urlButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(target.innerHTML);
+})
 
 // Listen for the input event on the urlInput element so that we can remove the protocol from the URL
 urlInput.addEventListener('input', (event) => {
@@ -116,16 +79,33 @@ urlInput.addEventListener('input', (event) => {
     urlInput.value = event.target.value.replace(/^https?:\/\//, '');
 });
 
+document.querySelectorAll('input').forEach( (input) => {
+    input.addEventListener('focus', (event) => {
+        event.target.value = '';
+    })
+});
+
 closeButtons.forEach( (button) => {
     button.addEventListener('click', (event) => {
         hideDialogs();
     })
 });
 
-function createUrl2Go() {
-    isError = true;
-    hasCompleted = false;      
+function queueAnimations(start) {
+    var rest = [].splice.call(arguments, 1),
+        promise = $.Deferred();
 
+    if (start) {
+        $.when(start()).then(function () {
+            queueAnimations.apply(window, rest);
+        });
+    } else {
+        promise.resolve();
+    }
+    return promise;
+}
+
+function createUrl2Go() {  
     hideDialogs();
 
     // Create new Url2Go
@@ -142,44 +122,71 @@ function createUrl2Go() {
         })
     })
         .then( async (response) => {
-            dbResponse = response;
-
-            if(dbResponse.status == 200) {
+            if(response.status == 200) {
                 gtag('event', 'create_url');
-                isError = false;
-            } else if(dbResponse.status == 400) {
-                isError = true;
             }
 
-            hasCompleted = true;
+            var btn = $('#submitButton');
+            var loadSVG = btn.children("a").children(".load");
+            var loadBar = btn.children("div").children("span");
+            var icon;
+
+            queueAnimations(function () {
+                return loadBar.animate({width: '100%'}, 500);
+            }, function () {
+                return loadSVG.fadeOut(200);
+            }, function () {
+                if(response.status === 400) {
+                    icon = btn.children("a").children(".cross");
+                } else {
+                    icon = btn.children("a").children(".check");
+                }
+    
+                return icon.fadeIn(200);
+            }, function () {
+                showResult(response);
+    
+                return btn.children("div").fadeOut(200);
+            }, function() {
+                loadBar.width(0);
+                        
+                return icon.fadeOut(200);
+            }, function() {
+                btn.children("a").animate({
+                    width: 150	
+                });
+    
+                return btn.animate({width: 150}, 300);
+            }, function() {
+                return btn.children("a").children("span").fadeIn(200);
+            });
         })
         .catch( (error) => {
+            console.error('Error: ', error);
             error();
         });
 }
 
-async function showResult() {
-    if(dbResponse.status == 200) {
+async function showResult(response) {
+    if(response.status === 200) {
         // Success, show success dialog
         success();
 
         document.querySelector('#short-url').innerHTML = 'gymox.page/' + keyInput.value;
-    } else if(dbResponse.status == 400) {
+    } else if(response.status === 400) {
         // Error, show error dialog
         error();
 
-        document.querySelector('#error-message').innerHTML = (await dbResponse.json()).errorMessage;
+        document.querySelector('#error-message').innerHTML = (await response.json()).errorMessage;
     }
 }
 
 function error() {
-    isError = true;
     successDialog.classList.remove('visible');
     errorDialog.classList.add('visible');
 }
 
 function success() {
-    isError = false;
     successDialog.classList.add('visible');
     errorDialog.classList.remove('visible');
 }
