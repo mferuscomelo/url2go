@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de-DE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,14 +32,20 @@
 
         gtag('config', 'G-L0QSJV7D9P');
     </script>
-
 </head>
 <body>
+    <div class="overlay"></div>
+
+    <!-- TODO: Add cookies options -->
     <section class="hero"> 
         <div class="content">
             <div class="text">
                 <h1>URL-2-GO fürs GO:</h1>
                 <h4>Ein URL-Verkürzer für das Gymnasium Ochsenhausen</h4>
+                <div class="button-border faq-button">
+                    So funktioniert es
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
             <img src="/images/hero-img.svg" alt="">
         </div>
@@ -48,14 +54,15 @@
     <section class="converter">
         <div class="converter-card fancy-card">
             <form>
+                <!-- TODO: Add clear button -->
                 <div class="form-group">
                     <span id="protocol">https://</span>
-                    <input aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
+                    <input onfocus="this.value=''" aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                     <span>gymox.page/</span>
-                    <input aria-label="benutzerdefinierten Link" class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
+                    <input onfocus="this.value=''" aria-label="benutzerdefinierten Link" class="form-field" id="key-input" type="text" autocomplete="off" placeholder="link">
                 </div>
 
                 <div class="button" id="submitButton">
@@ -88,12 +95,6 @@
                         <span></span>
                     </div>
                 </div>
-                
-
-                <!-- <button id="submitButton" type="submit">
-                    <div class="loader"></div>
-                    <span id="submitButtonText">Kürzen!</span>
-                </button> -->
             </form>
 
             <div class="dialog success-dialog">
@@ -114,6 +115,23 @@
         </div>
     </section>
 
+    <section class="faq">
+        <div class="header">
+            <h3 class="title">FAQ</h3>
+            <div class="close"></div>
+        </div>
+
+        <p class="accordion">Wie kann ich meinen Link kürzen?</p>
+        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    
+        <p class="accordion">Wie kann ich mitmachen?</p>
+        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    
+        <p class="accordion">Lorem ipsum dolor sit amet</p>
+        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    </section>
+
+
     <p class="credits">
         Mit <i class="fas fa-heart"></i> entwickelt von Milan Ferus-Comelo
     </p>
@@ -123,5 +141,6 @@
 
     <!-- JavaScript -->
     <script type="module" src="main.js"></script>
+    <script type="module" src="faq.js"></script>
 </body>
 </html>
