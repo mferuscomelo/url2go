@@ -5,7 +5,7 @@ gtag('js', new Date());
 gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
 
 // Get the submit button so that we can listen for the click event
-const submitButton = document.querySelector('#submitButton');
+const submitButton = $('#submitButton');
 
 // Get the input for the long URL so that we can query the value
 const urlInput = document.querySelector('#url-input');
@@ -26,7 +26,7 @@ keyInput.value = '';
 var protocol;
 
 // Listen for the click event on the submit button
-submitButton.addEventListener('click', () => {
+submitButton.click( () => {
     if(urlInput.value == '' || urlInput.value == null || 
         keyInput.value == '' || keyInput.value == null) {
         // Error, show error dialog
@@ -36,17 +36,17 @@ submitButton.addEventListener('click', () => {
 
     // Start to animate button (wait at 75% until response from db)
     queueAnimations(function() {
-        return submitButton.children("a").children("span").fadeOut(200);
+        return submitButton.children('a').children('span').fadeOut(200);
     }, function() {
-        return submitButton.children("a").animate({width: 42.33}, 100);
+        return submitButton.children('a').animate({width: 43}, 100);
     }, function () {
-        submitButton.children("a").children(".load").fadeIn(300);
+        submitButton.children('a').children('.load').fadeIn(300);
         return submitButton.animate({width: 320}, 200);
     }, function () {
         createUrl2Go();
         return submitButton.children('div').fadeIn(200);
     }, function () {
-        return submitButton.children("div").children("span").animate({width: '75%'}, 1500);
+        return submitButton.children('div').children('span').animate({width: '75%'}, 1500);
     });
 });
 
@@ -120,8 +120,8 @@ function createUrl2Go() {
             }
 
             // Continue animating the button from 75% to 100%
-            var loadSVG = submitButton.children("a").children(".load");
-            var loadBar = submitButton.children("div").children("span");
+            var loadSVG = submitButton.children('a').children('.load');
+            var loadBar = submitButton.children('div').children('span');
             var icon;
 
             queueAnimations(function () {
@@ -130,28 +130,28 @@ function createUrl2Go() {
                 return loadSVG.fadeOut(200);
             }, function () {
                 if(response.status === 400) {
-                    icon = submitButton.children("a").children(".cross");
+                    icon = submitButton.children('a').children('.cross');
                 } else {
-                    icon = submitButton.children("a").children(".check");
+                    icon = submitButton.children('a').children('.check');
                 }
     
                 return icon.fadeIn(200);
             }, function () {
                 showResult(response);
     
-                return submitButton.children("div").fadeOut(200);
+                return submitButton.children('div').fadeOut(200);
             }, function() {
                 loadBar.width(0);
                         
                 return icon.fadeOut(200);
             }, function() {
-                submitButton.children("a").animate({
+                submitButton.children('a').animate({
                     width: 150	
                 });
     
                 return submitButton.animate({width: 150}, 300);
             }, function() {
-                return submitButton.children("a").children("span").fadeIn(200);
+                return submitButton.children('a').children('span').fadeIn(200);
             });
         })
         .catch( (error) => {

@@ -23,6 +23,7 @@ admin.initializeApp({
   credential: admin.credential.applicationDefault(),
   databaseURL: "https://url2go-295111.firebaseio.com"
 });
+
 const db = admin.firestore();
 
 // Initialize the app
