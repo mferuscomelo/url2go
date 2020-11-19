@@ -28,14 +28,12 @@
 </head>
 <body>
     <div class="overlay"></div>
-
-    <!-- TODO: Add cookies options -->
     <section class="hero"> 
         <div class="content">
             <div class="text">
                 <h1>URL-2-GO fürs GO:</h1>
                 <h4>Ein URL-Verkürzer für das Gymnasium Ochsenhausen</h4>
-                <div class="button-border faq-button">
+                <div class="button button-border faq-button">
                     So funktioniert es
                     <i class="fas fa-chevron-right"></i>
                 </div>
@@ -47,7 +45,6 @@
     <section class="converter">
         <div class="converter-card fancy-card">
             <form>
-                <!-- TODO: Add clear button -->
                 <div class="form-group">
                     <span id="protocol">https://</span>
                     <input aria-label="Lange URL" class="form-field" id="url-input" type="text" placeholder="Lange URL" autocomplete="off">
@@ -134,6 +131,37 @@
         <p>Falls du mithelfen möchtest oder weitere Fragen hast, schicke bitte eine Email an <a href="mailto:milan.ferus-comelo@gymox.de">milan.ferus-comelo@gymox.de</a>.</p>
     </section>
 
+    <section class="cookies-dialog">
+        <div class="dialog">
+            <h5 class="title">Datenschutzeinstellungen</h5>
+            <p>Wir nutzen Cookies auf unsere Webseite. Einige von ihnen sind essentiell, waehrend andere uns helfen, diese Webseite unf ihre Erfahrung zu verbessern.</p>
+            <div class="options">
+                <label class="checkbox checkbox--disabled">
+                    <span class="checkbox__input">
+                        <input type="checkbox" name="disabled-checked" disabled checked>
+                        <span class="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                        </span>
+                    </span>
+                    <span class="radio__label">Essenziell</span>
+                </label>
+                <label class="checkbox">
+                    <span class="checkbox__input">
+                        <input type="checkbox" id="accept-analytics" name="checked" checked>
+                        <span class="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                        </span>
+                    </span>
+                    <span class="radio__label">Analytics</span>
+                </label>
+            </div>
+            <div class="button accept-button">Alle akzeptieren</div>
+            <div class="link save-button">Speichern und schliessen</div>
+        </div>
+    </section>
+
 
     <p class="credits">
         Mit <i class="fas fa-heart"></i> entwickelt von Milan Ferus-Comelo
@@ -143,6 +171,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- JavaScript -->
+    <script type="module" src="cookies.js"></script>
     <script type="module" src="main.js"></script>
     <script type="module" src="faq.js"></script>
 </body>

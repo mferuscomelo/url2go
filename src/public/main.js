@@ -1,8 +1,15 @@
+var disableCookies = false
+if(localStorage.getItem('no_cookies') || location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    disableCookies = true;
+}
+
 // Google Analytics
-window.dataLayer = window.dataLayer || [];
-function gtag(){ dataLayer.push(arguments); }
-gtag('js', new Date());
-gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
+if(!disableCookies) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
+}
 
 // Get the submit button so that we can listen for the click event
 const submitButton = $('#submitButton');
@@ -18,6 +25,9 @@ const successDialog = document.querySelector('.success-dialog');
 
 // Get the error dialog element so that we can show it
 const errorDialog = document.querySelector('.error-dialog');
+
+// For copying the short URL to the clipboard
+const shortUrlButton = document.querySelector('#short-url');
 
 // Reset the input fields on page load
 urlInput.value = '';
@@ -51,8 +61,12 @@ submitButton.click( () => {
 });
 
 // For copy to clipboard
-document.querySelector('#short-url').addEventListener('click', () => {
-    navigator.clipboard.writeText(target.innerHTML);
+shortUrlButton.addEventListener('click', (event) => {
+    navigator.clipboard.writeText(event.target.innerHTML);
+    shortUrlButton.setAttribute("data-balloon", "Fertig!");
+    setTimeout( () => {
+        shortUrlButton.setAttribute("data-balloon", "In die Zwischenablage kopieren");
+    }, 2000);
 })
 
 // Listen for the input event on the urlInput element so that we can remove the protocol from the URL
@@ -115,7 +129,7 @@ function createUrl2Go() {
     })
         .then( async (response) => {
             // Log create_url event in Google Analytics
-            if(response.status == 200) {
+            if(response.status == 200 && !disableCookies) {
                 gtag('event', 'create_url');
             }
 
@@ -146,10 +160,10 @@ function createUrl2Go() {
                 return icon.fadeOut(200);
             }, function() {
                 submitButton.children('a').animate({
-                    width: 150	
+                    width: 100	
                 });
     
-                return submitButton.animate({width: 150}, 300);
+                return submitButton.animate({width: 100}, 300);
             }, function() {
                 return submitButton.children('a').children('span').fadeIn(200);
             });

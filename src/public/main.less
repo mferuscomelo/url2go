@@ -82,56 +82,24 @@ a {
     color: var(--dark-aqua-color);
 }
 
-button {
-    background-color: var(--aqua-color);
+.button {
+    border-radius: var(--border-radius);
+    position: relative;
+    user-select: none;
+    background: var(--aqua-color);
     color: white;
-
-    border-radius: var(--border-radius);
     width: 150px;
-    border: none;
-    cursor: pointer !important;
-
-    font-family: inherit;
-
-    &:hover {
-        background-color: var(--dark-aqua-color);
-    }
-}
-
-.button-border {
-    border: 2px solid var(--aqua-color);
-    border-radius: var(--border-radius);
-    background: white;
-    color: var(--aqua-color);
-    width: 200px;
-    height: 43px;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     cursor: pointer;
+    height: 43px;
 
-    i {
-        margin-left: 15px;
+    &#submitButton {
+        display: block;
+        background: #fff;
     }
-
-    &:hover {
-        background: #F0FBFA;
-    }
-}
-
-.button {
-    border-radius: var(--border-radius);
-    // position: absolute;
-    position: relative;
-    // left: 50%;
-    // top: 50%;
-    display: block;
-    background: #fff;
-    width: 150px;
-    // box-shadow: 0 2px 6px rgba(170, 185, 200, 0.4);
-    // -webkit-transform: translate(-50%, -50%);
-    // transform: translate(-50%, -50%);
 
     svg {
         display: none;
@@ -192,6 +160,21 @@ button {
             cursor: pointer;
             display: block;
         }
+    }
+}
+
+.button-border {
+    border: 2px solid var(--aqua-color);
+    background: white;
+    color: var(--aqua-color);
+    width: 200px;
+
+    i {
+        margin-left: 15px;
+    }
+
+    &:hover {
+        background: #F0FBFA;
     }
 }
   
@@ -293,6 +276,61 @@ section {
                 &:hover {
                     opacity: 1;
                 }
+            }
+        }
+    }
+
+    &.cookies-dialog {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        align-items: center;
+        display: none;
+
+        &.visible {
+            display: flex;
+        }
+
+        .dialog {
+            width: 400px;
+            background-color: white;
+            z-index: 99;
+            border-radius: var(--border-radius);
+            padding: 20px;
+
+            .title {
+                margin-top: 0;
+            }
+
+            p {
+                color: var(--grey-color);
+                margin: 0;
+            }
+
+            .options {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                margin: 10px auto;
+                color: var(--grey-color);
+            }
+
+            .button {
+                width: 350px;
+                margin: 10px auto;
+            }
+
+            .link {
+                width: 350px;
+                margin: 0 auto;
+                color: var(--aqua-color);
+                text-align: center;
+                cursor: pointer;
             }
         }
     }
@@ -443,7 +481,9 @@ section {
             background-color: white;
             border-radius: 6px;
             padding: 5px;
-            width: unset;
+            cursor: pointer;
+            border: none;
+            user-select: none;
         }
 
         i {
@@ -527,5 +567,58 @@ form {
 
     i {
         color: var(--red-color);
+    }
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: 0.5em;
+    // font-size: 2rem;
+    color: var(--color);
+    user-select: none;
+
+    &--disabled {
+        color: var(--light-grey-color);
+    }
+}
+
+.checkbox__control {
+    display: inline-grid;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.25em;
+    border: 0.1em solid currentColor;
+
+    svg {
+        transition: transform 0.1s ease-in 25ms;
+        transform: scale(0);
+        transform-origin: bottom left;
+    }
+}
+
+.checkbox__input {
+    display: grid;
+
+    > * {
+        grid-area: checkbox;
+    }
+
+    input {
+        opacity: 0;
+        width: 1em;
+        height: 1em;
+
+        &:focus + .checkbox__control {
+            box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+        }
+
+        &:checked + .checkbox__control svg {
+            transform: scale(1);
+        }
+
+        &:disabled + .checkbox__control {
+            color: var(--disabled);
+        }
     }
 }
