@@ -56,6 +56,7 @@ submitButton.click( () => {
         createUrl2Go();
         return submitButton.children('div').fadeIn(200);
     }, function () {
+        submitButton.children('div').children('span').width(0);
         return submitButton.children('div').children('span').animate({width: '75%'}, 1500);
     });
 });
@@ -123,13 +124,12 @@ function createUrl2Go() {
         },
         body: JSON.stringify({
             url: protocol + urlInput.value,
-            key: keyInput.value,
-            expireTime: 60, // TODO: need to implement an auto-delete feature
+            id: keyInput.value,
         })
     })
         .then( async (response) => {
             // Log create_url event in Google Analytics
-            if(response.status == 200 && !disableCookies) {
+            if(response.ok && !disableCookies) {
                 gtag('event', 'create_url');
             }
 
@@ -143,7 +143,7 @@ function createUrl2Go() {
             }, function () {
                 return loadSVG.fadeOut(200);
             }, function () {
-                if(response.status === 400) {
+                if(!response.ok) {
                     icon = submitButton.children('a').children('.cross');
                 } else {
                     icon = submitButton.children('a').children('.check');
@@ -176,16 +176,19 @@ function createUrl2Go() {
 
 // Function to show the success/error dialogs
 async function showResult(response) {
-    if(response.status === 200) {
+    const result = await response.json();
+    console.log(result);
+
+    if(response.ok) {
         // Success, show success dialog
         success();
 
-        document.querySelector('#short-url').innerHTML = 'gymox.page/' + keyInput.value;
-    } else if(response.status === 400) {
+        document.querySelector('#short-url').innerHTML = `gymox.page/${result.id}`;
+    } else {
         // Error, show error dialog
         error();
 
-        document.querySelector('#error-message').innerHTML = (await response.json()).errorMessage;
+        document.querySelector('#error-message').innerHTML = result.message;
     }
 }
 
