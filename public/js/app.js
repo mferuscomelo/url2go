@@ -1,15 +1,12 @@
-var disableCookies = false
 if(localStorage.getItem('no_cookies') || location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    disableCookies = true;
+    window['ga-disable-G-L0QSJV7D9P'] = true;
 }
 
 // Google Analytics
-if(!disableCookies) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
-}
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
 
 // Get the submit button so that we can listen for the click event
 const submitButton = $('#submitButton');
@@ -129,7 +126,7 @@ function createUrl2Go() {
     })
         .then( async (response) => {
             // Log create_url event in Google Analytics
-            if(response.ok && !disableCookies) {
+            if(response.ok) {
                 gtag('event', 'create_url');
             }
 

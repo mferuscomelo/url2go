@@ -14,7 +14,6 @@ $(document).ready(function() {
 });
 
 acceptButton.addEventListener('click', () => {
-    localStorage.setItem('no_cookies', false);
     cookiesDialog.classList.remove('visible');
     overlay.classList.remove('visible');
 });
