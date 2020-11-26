@@ -31,6 +31,6 @@
     "npm": "6.x"
   },
   "devDependencies": {
-    "snyk": "^1.425.3"
+    "snyk": "^1.431.1"
   }
 }
