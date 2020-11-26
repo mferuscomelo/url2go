@@ -27,14 +27,13 @@
     <script src="https://www.googletagmanager.com/gtag/js?id=G-L0QSJV7D9P"></script>
 </head>
 <body>
-    <!-- TODO: Need to give credit to ManyPixels and FontAwesome -->
     <div class="overlay"></div>
     <section class="hero"> 
         <div class="content">
             <div class="text">
                 <h1>URL-2-GO fürs GO:</h1>
                 <h4>Ein URL-Verkürzer für das Gymnasium Ochsenhausen</h4>
-                <div class="button button-border faq-button">
+                <div class="button button-border dialog-button" data-dialog="faq">
                     So funktioniert es
                     <i class="fas fa-chevron-right"></i>
                 </div>
@@ -106,74 +105,57 @@
         </div>
     </section>
 
-    <section class="faq">
-        <div class="header">
-            <h3 class="title">FAQ</h3>
-            <div class="close"></div>
-        </div>
-
-        <p class="accordion">Wofür ist das?</p>
-        <div class="panel">Um Zeit zu sparen und Fehler zu vermeiden! Anstatt euren Freunden ganz lange Links zu schicken, könnt ihr Url2Go benutzen, um daraus einen kurzen, griffigen Namen zu machen. Die Empfänger müssen also nur einen kurzen Link eintippen. Fehler werden dadurch vermieden und Zeit gespart!</div>
-
-        <p class="accordion">Wie funktioniert das?</p>
-        <div class="panel">
-            <ol>
-                <li>Das lange URL eingeben</li>
-                <li>Verkürzte neue URL eingeben</li>
-                <li>Auf "Kürzen" klicken</li>
-                <li>Den verkürzten Link kopieren</li>
-                <li>Fertig! Jetzt kannst du es benutzen :)</li>
-            </ol>
-        </div>
-    
-        <p class="accordion">Wie kann ich mithelfen?</p>
-        <div class="panel">Dieses Projekt ist Open Source und ist auf <a href="https://github.com/mferuscomelo/url2go">GitHub</a> veröffentlicht. Falls du mithelfen möchtest oder Fragen hast, schicke bitte eine Email an <a href="mailto:milan.ferus-comelo@gymox.de">milan.ferus-comelo@gymox.de</a>.</div>
-
-        <p>Falls du mithelfen möchtest oder weitere Fragen hast, schicke bitte eine Email an <a href="mailto:milan.ferus-comelo@gymox.de">milan.ferus-comelo@gymox.de</a>.</p>
-    </section>
-
-    <section class="cookies-dialog">
-        <div class="dialog">
-            <h5 class="title">Datenschutzeinstellungen</h5>
-            <p>Wir nutzen Cookies auf unsere Webseite. Einige von ihnen sind essentiell, waehrend andere uns helfen, diese Webseite unf ihre Erfahrung zu verbessern.</p>
-            <div class="options">
-                <label class="checkbox checkbox--disabled">
-                    <span class="checkbox__input">
-                        <input type="checkbox" name="disabled-checked" disabled checked>
-                        <span class="checkbox__control">
-                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                    </span>
-                    <span class="radio__label">Essenziell</span>
-                </label>
-                <label class="checkbox">
-                    <span class="checkbox__input">
-                        <input type="checkbox" id="accept-analytics" name="checked" checked>
-                        <span class="checkbox__control">
-                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                    </span>
-                    <span class="radio__label">Analytics</span>
-                </label>
-            </div>
-            <div class="button accept-button">Alle akzeptieren</div>
-            <div class="link save-button">Speichern und schliessen</div>
-        </div>
-    </section>
-
-
     <p class="credits">
         Mit <i class="fas fa-heart"></i> entwickelt von Milan Ferus-Comelo
     </p>
+
+    <div class="sources-button dialog-button" data-dialog="sources">Quellen</div>
+
+    <!-- Dialogs -->
+    <section class="dialog-container" id="faq-dialog">
+        <div class="dialog">
+            <div class="header">
+                <h3 class="title">FAQ</h3>
+                <div class="close"></div>
+            </div>
+    
+            <p class="accordion">Wofür ist das?</p>
+            <div class="panel">Um Zeit zu sparen und Fehler zu vermeiden! Anstatt euren Freunden ganz lange Links zu schicken, könnt ihr Url2Go benutzen, um daraus einen kurzen, griffigen Namen zu machen. Die Empfänger müssen also nur einen kurzen Link eintippen. Fehler werden dadurch vermieden und Zeit gespart!</div>
+    
+            <p class="accordion">Wie funktioniert das?</p>
+            <div class="panel">
+                <ol>
+                    <li>Das lange URL eingeben</li>
+                    <li>Verkürzte neue URL eingeben</li>
+                    <li>Auf "Kürzen" klicken</li>
+                    <li>Den verkürzten Link kopieren</li>
+                    <li>Fertig! Jetzt kannst du es benutzen :)</li>
+                </ol>
+            </div>
+        
+            <p class="accordion">Wie kann ich mithelfen?</p>
+            <div class="panel">Dieses Projekt ist Open Source und ist auf <a href="https://github.com/mferuscomelo/url2go">GitHub</a> veröffentlicht. Falls du mithelfen möchtest oder Fragen hast, schicke bitte eine Email an <a href="mailto:milan@gymox.page">milan@gymox.page</a>.</div>
+    
+            <p>Falls du mithelfen möchtest oder weitere Fragen hast, schicke bitte eine Email an <a href="mailto:milan@gymox.page">milan@gymox.page</a>.</p>
+        </div>
+    </section>
+
+    <section class="dialog-container" id="sources-dialog">
+        <div class="dialog">
+            <div class="header">
+                <h3 class="title">Quellen</h3>
+                <div class="close"></div>
+            </div>
+            <p>Icons von <a href="https://fontawesome.com/license/">Font Awesome</a>, Illustations von <a href="https://www.manypixels.co/gallery/license">ManyPixels</a>.</p>
+        </div>
+    </section>
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- JavaScript -->
-    <script type="module" src="js/cookies.js"></script>
-    <script type="module" src="js/app.js"></script>
     <script type="module" src="js/faq.js"></script>
+    <script type="module" src="js/dialog.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

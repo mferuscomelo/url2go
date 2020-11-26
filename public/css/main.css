@@ -62,7 +62,7 @@ h5 {
   font-size: 1.25rem;
 }
 small,
-.text_small {
+.text-small {
   font-size: 0.8rem;
 }
 a {
@@ -185,102 +185,6 @@ section.not-found img {
   max-height: 50%;
   max-width: 50%;
   margin-bottom: 50px;
-}
-section.faq {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
-  position: absolute;
-  background: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
-  padding: 0 20px;
-  border-radius: 6px;
-  display: none;
-}
-section.faq.visible {
-  display: block;
-}
-section.faq .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-section.faq .header .close {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-  cursor: pointer;
-}
-section.faq .header .close:before {
-  transform: rotate(45deg);
-}
-section.faq .header .close:after {
-  transform: rotate(-45deg);
-}
-section.faq .header .close:before,
-section.faq .header .close:after {
-  position: absolute;
-  left: 15px;
-  content: " ";
-  height: 33px;
-  width: 2px;
-  background-color: #333;
-}
-section.faq .header .close:hover {
-  opacity: 1;
-}
-section.cookies-dialog {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-section.cookies-dialog.visible {
-  display: flex;
-}
-section.cookies-dialog .dialog {
-  width: 400px;
-  background-color: white;
-  z-index: 99;
-  border-radius: var(--border-radius);
-  padding: 20px;
-}
-section.cookies-dialog .dialog .title {
-  margin-top: 0;
-}
-section.cookies-dialog .dialog p {
-  color: var(--grey-color);
-  margin: 0;
-}
-section.cookies-dialog .dialog .options {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 10px auto;
-  color: var(--grey-color);
-}
-section.cookies-dialog .dialog .button {
-  width: 350px;
-  margin: 10px auto;
-}
-section.cookies-dialog .dialog .link {
-  width: 350px;
-  margin: 0 auto;
-  color: var(--aqua-color);
-  text-align: center;
-  cursor: pointer;
 }
 .form-field {
   display: block;
@@ -492,6 +396,13 @@ form .form-group:nth-of-type(2) {
 .credits i {
   color: var(--red-color);
 }
+.sources-button {
+  padding-left: 25px;
+  position: absolute;
+  bottom: 0;
+  color: var(--aqua-color);
+  cursor: pointer;
+}
 .checkbox {
   display: grid;
   grid-template-columns: min-content auto;
@@ -533,4 +444,84 @@ form .form-group:nth-of-type(2) {
 }
 .checkbox__input input:disabled + .checkbox__control {
   color: var(--disabled);
+}
+.dialog-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.dialog-container.visible {
+  display: flex;
+}
+.dialog-container .dialog {
+  width: 90%;
+  max-width: 1100px;
+  background-color: white;
+  z-index: 99;
+  padding: 20px;
+  border-radius: var(--border-radius);
+}
+.dialog-container .dialog .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  margin-bottom: 25px;
+}
+.dialog-container .dialog .header .title {
+  margin: 0;
+}
+.dialog-container .dialog .header .close {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+.dialog-container .dialog .header .close:before {
+  transform: rotate(45deg);
+}
+.dialog-container .dialog .header .close:after {
+  transform: rotate(-45deg);
+}
+.dialog-container .dialog .header .close:before,
+.dialog-container .dialog .header .close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.dialog-container .dialog .header .close:hover {
+  opacity: 1;
+}
+.dialog-container .dialog p {
+  color: var(--grey-color);
+  margin: 0;
+}
+.dialog-container .dialog .options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10px auto;
+  color: var(--grey-color);
+}
+.dialog-container .dialog .button {
+  width: 350px;
+  margin: 10px auto;
+}
+.dialog-container .dialog .link {
+  width: 350px;
+  margin: 0 auto;
+  color: var(--aqua-color);
+  text-align: center;
+  cursor: pointer;
 }
