@@ -1,13 +1,3 @@
-if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    window['ga-disable-G-L0QSJV7D9P'] = true;
-}
-
-// Google Analytics
-// window.dataLayer = window.dataLayer || [];
-// function gtag(){ dataLayer.push(arguments); }
-// gtag('js', new Date());
-// gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
-
 // Get the submit button so that we can listen for the click event
 const submitButton = $('#submitButton');
 
@@ -174,8 +164,7 @@ function createUrl2Go() {
 // Function to show the success/error dialogs
 async function showResult(response) {
     const result = await response.json();
-    console.log(result);
-
+    
     if(response.ok) {
         // Success, show success dialog
         success();
