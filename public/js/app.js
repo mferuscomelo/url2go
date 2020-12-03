@@ -1,12 +1,12 @@
-if(localStorage.getItem('no_cookies') || location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+if(location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     window['ga-disable-G-L0QSJV7D9P'] = true;
 }
 
 // Google Analytics
-window.dataLayer = window.dataLayer || [];
-function gtag(){ dataLayer.push(arguments); }
-gtag('js', new Date());
-gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
+// window.dataLayer = window.dataLayer || [];
+// function gtag(){ dataLayer.push(arguments); }
+// gtag('js', new Date());
+// gtag('config', 'G-L0QSJV7D9P', {cookie_flags: 'SameSite=None;Secure'});
 
 // Get the submit button so that we can listen for the click event
 const submitButton = $('#submitButton');

@@ -29,8 +29,8 @@ app.use(parallelLoad([
   helmet(),
   helmet.contentSecurityPolicy({
     directives: {
-      "default-src": ["'self'", "https://fonts.googleapis.com/", "https://fonts.gstatic.com/", "https://use.fontawesome.com/", "http://www.w3.org/", "data:", "https://www.google-analytics.com/", "http://www.googletagmanager.com/"],
-      "script-src": ["'self'", "https://ajax.googleapis.com", "http://www.googletagmanager.com/"],
+      "default-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://fonts.gstatic.com/", "https://use.fontawesome.com/", "http://www.w3.org/", "data:", "https://www.google-analytics.com/", "http://www.googletagmanager.com/", "https://cdn.cookielaw.org/"],
+      "script-src": ["'strict-dynamic'", "'nonce-rAnd0m123'", "'unsafe-inline'", "http:", "https:"]
     }
   }),
   compression(),
