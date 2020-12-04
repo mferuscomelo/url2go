@@ -94,7 +94,7 @@ app.post('/create-url', async (req, res, next) => {
 
     await db.collection('urls').doc(id).set(newUrl);
 
-    res.json(newUrl);
+    return res.json(newUrl);
   } catch (error) {
     next(error);
   }
