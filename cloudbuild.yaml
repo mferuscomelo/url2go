@@ -1,8 +1,0 @@
-# For the auto-deploy script
-steps:
-- name: node
-  entrypoint: npm
-  args: ['install']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy']
-  timeout: '1600s'
