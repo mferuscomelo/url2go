@@ -1,7 +1,8 @@
 name: Firebase Function Deploy
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
     
 jobs:
   build:

@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint .",
-    "serve": "firebase emulators:start --only functions && set DEBUG=express:* && npx nodemon index.js",
+    "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
