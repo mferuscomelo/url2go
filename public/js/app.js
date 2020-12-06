@@ -16,6 +16,8 @@ const errorDialog = document.querySelector('.error-dialog');
 // For copying the short URL to the clipboard
 const shortUrlButton = document.querySelector('#short-url');
 
+const analytics = firebase.analytics();
+
 // Reset the input fields on page load
 urlInput.value = '';
 keyInput.value = '';
@@ -106,18 +108,18 @@ function createUrl2Go() {
     fetch('/create-url', {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            url: protocol + urlInput.value,
-            id: keyInput.value,
-        })
+            "id": keyInput.value,
+            "url": protocol + urlInput.value,
+        }),
+        redirect: 'follow'
     })
         .then( async (response) => {
-            // Log create_url event in Google Analytics
+            // Log created_url event in Google Analytics
             if(response.ok) {
-                gtag('event', 'create_url');
+                analytics.logEvent('created_url');
             }
 
             // Continue animating the button from 75% to 100%
