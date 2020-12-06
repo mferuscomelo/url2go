@@ -14,11 +14,8 @@ jobs:
         cd functions
         npm ci
     - name:  Deploy to Firebase
-      run: |
-        alias firebase="`npm config get prefix`/bin/firebase"
-        firebase deploy --only functions --token $FIREBASE_TOKEN
-      # uses: w9jds/firebase-action@master
-      # with:
-      #     args: deploy --only functions
+      uses: w9jds/firebase-action@master
+      with:
+          args: deploy --only functions
       env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_URL2GO_295111 }}
