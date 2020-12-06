@@ -42,7 +42,6 @@ app.use(parallelLoad([
 const notFoundPath = path.join(__dirname, 'public', '404.html');
 
 app.get('/:id', async (req, res) => {
-    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     res.setHeader('Content-Encoding', 'compression');
     res.setHeader('Content-Type', 'text/html');
 
@@ -54,7 +53,7 @@ app.get('/:id', async (req, res) => {
         if(url) {
             return res.redirect(url.url)
         }
-
+        
         return res.status(404).sendFile(notFoundPath);
     } catch (error) {
         return res.status(404).sendFile(notFoundPath);
