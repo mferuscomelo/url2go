@@ -45,7 +45,8 @@ app.get('/:id', async (req, res) => {
     res.setHeader('Content-Encoding', 'compression');
     res.setHeader('Content-Type', 'text/html');
 
-    const { id } = req.params;
+    let { id } = req.params;
+    id = id.toLowerCase();
 
     try {
         const url = await getUrl(id);
